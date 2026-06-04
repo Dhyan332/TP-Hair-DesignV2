@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TP Hair Design</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fff8f4; color: #1f1b17; }
+  h1, h2, h3, h4 { font-family: 'Noto Serif', serif; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; width: 100%; z-index: 50; background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #f0ece8; box-shadow: 0 1px 4px rgba(197,160,89,0.08); }
+  .nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 2rem; height: 80px; display: flex; justify-content: space-between; align-items: center; }
+  .nav-logo { font-family: 'Noto Serif', serif; font-size: 1.4rem; letter-spacing: 0.15em; color: #292524; }
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .nav-links a { font-family: 'Noto Serif', serif; text-decoration: none; color: #78716c; font-size: 0.95rem; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: #C5A059; border-bottom: 1px solid #C5A059; padding-bottom: 2px; }
+  .nav-book-btn { background: #775a19 !important; color: white !important; padding: 0.6rem 1.4rem !important; border-radius: 4px !important; border-bottom: none !important; font-size: 0.75rem !important; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700 !important; transition: background 0.2s !important; }
+  .nav-book-btn:hover { background: #5d4201 !important; color: white !important; border-bottom: none !important; }
+
+  /* HERO */
+  .hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding-top: 80px; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; z-index: 0; }
+  .hero-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.18; }
+  .hero-bg-overlay { position: absolute; inset: 0; background: linear-gradient(to right, #fff8f4 40%, rgba(255,248,244,0.7) 70%, transparent); }
+  .hero-inner { max-width: 1280px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 10; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+  .hero-label { font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: #775a19; font-weight: 700; }
+  .hero h1 { font-size: 3.2rem; line-height: 1.2; letter-spacing: -0.02em; font-weight: 600; color: #1f1b17; margin: 1rem 0; }
+  .hero-sub { font-size: 1.1rem; color: #4e4639; font-style: italic; max-width: 480px; line-height: 1.6; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+  .btn-outline { display: inline-block; border: 1px solid #ffcfc6; color: #79564f; padding: 1.2rem 2.5rem; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; text-decoration: none; transition: background 0.2s; }
+  .btn-outline:hover { background: rgba(255,207,198,0.1); }
+  .btn-book { display: inline-block; background: #775a19; color: white; padding: 1.2rem 2.5rem; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; text-decoration: none; transition: background 0.2s; border-radius: 4px; }
+  .btn-book:hover { background: #5d4201; }
+  .hero-img-wrap { position: relative; height: 600px; border-top-left-radius: 100px; }
+  .hero-img-wrap img { width: 100%; height: 100%; object-fit: cover; border-top-left-radius: 100px; box-shadow: 0 25px 50px rgba(0,0,0,0.15); }
+  .hero-quote { position: absolute; bottom: -2rem; left: -2rem; background: white; padding: 2rem; box-shadow: 0 10px 40px rgba(0,0,0,0.1); max-width: 280px; border-left: 4px solid #775a19; }
+  .hero-quote p { font-size: 0.9rem; color: #4e4639; font-style: italic; line-height: 1.6; }
+
+  /* ABOUT */
+  .about { padding: 6rem 2rem; background: #fbf2eb; }
+  .about-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .about-imgs { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .about-imgs img:first-child { height: 260px; object-fit: cover; border-radius: 8px; width: 100%; }
+  .about-imgs img:last-child { height: 320px; object-fit: cover; border-radius: 8px; width: 100%; margin-top: 3rem; }
+  .about-text h2 { font-size: 2.2rem; color: #1f1b17; margin-bottom: 1rem; }
+  .about-divider { width: 80px; height: 4px; background: #775a19; margin-bottom: 1.5rem; }
+  .about-text p { font-size: 1.05rem; color: #4e4639; line-height: 1.7; margin-bottom: 1rem; }
+  .about-badge { display: flex; align-items: center; gap: 1rem; margin-top: 1.5rem; }
+  .about-badge span.material-symbols-outlined { color: #775a19; }
+  .about-badge-label { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: #4e4639; font-weight: 700; }
+
+  /* SERVICES */
+  .services { padding: 6rem 2rem; max-width: 1280px; margin: 0 auto; }
+  .section-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: #775a19; font-weight: 700; }
+  .section-title { font-size: 2.2rem; color: #1f1b17; margin: 0.5rem 0 1rem; }
+  .section-sub { font-size: 0.95rem; color: #4e4639; max-width: 600px; margin: 0 auto; }
+  .services-header { text-align: center; margin-bottom: 4rem; }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem 2rem; }
+  .service-card { border-bottom: 1px solid rgba(119,90,25,0.1); padding-bottom: 2rem; transition: border-color 0.2s; }
+  .service-card:hover { border-color: #775a19; }
+  .service-card h3 { font-size: 1.3rem; color: #1f1b17; margin-bottom: 1rem; }
+  .service-card ul { list-style: none; }
+  .service-card li { display: flex; justify-content: space-between; align-items: center; font-size: 0.95rem; color: #4e4639; padding: 0.5rem 0; }
+  .service-card li::after { content: ''; display: block; width: 48px; height: 1px; background: #d1c5b4; }
+  .service-badge { display: inline-block; margin-top: 1rem; padding: 0.25rem 0.75rem; background: rgba(255,207,198,0.3); color: #79564f; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 999px; }
+
+  /* GALLERY */
+  .gallery { background: white; padding: 6rem 2rem; }
+  .gallery-inner { max-width: 1280px; margin: 0 auto; }
+  .gallery-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; }
+  .gallery-follow { font-size: 0.9rem; color: #4e4639; font-style: italic; border-bottom: 1px solid rgba(119,90,25,0.2); padding-bottom: 4px; }
+  .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .gallery-grid .tall { grid-row: span 2; }
+  .gallery-grid div { overflow: hidden; background: #eae1da; }
+  .gallery-grid div:not(.tall) { aspect-ratio: 1; }
+  .gallery-grid img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s; }
+  .gallery-grid img:hover { transform: scale(1.1); }
+
+  /* BOOKING SECTION */
+  .booking { padding: 6rem 2rem; background: #fbf2eb; }
+  .booking-inner { max-width: 1280px; margin: 0 auto; text-align: center; }
+  .booking-inner .section-sub { margin: 0 auto 2.5rem; }
+
+  /* CONTACT */
+  .contact { padding: 6rem 2rem; background: #fff8f4; }
+  .contact-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .contact h2 { font-size: 2.2rem; color: #1f1b17; margin-bottom: 1rem; }
+  .contact-sub { font-size: 1.05rem; color: #4e4639; font-style: italic; max-width: 380px; }
+  .contact-loc { display: flex; gap: 1.5rem; align-items: flex-start; margin: 2rem 0; }
+  .contact-loc .material-symbols-outlined { color: #775a19; background: rgba(119,90,25,0.05); padding: 0.75rem; border-radius: 50%; }
+  .contact-loc-label { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: #4e4639; font-weight: 700; margin-bottom: 0.25rem; }
+  .contact-loc p { font-size: 0.95rem; color: #1f1b17; line-height: 1.6; }
+  .hours-box { background: #f5ece5; padding: 2rem; border-radius: 8px; }
+  .hours-box h4 { font-size: 1.3rem; color: #1f1b17; margin-bottom: 1.5rem; }
+  .hours-row { display: flex; justify-content: space-between; padding: 0.6rem 0; border-bottom: 1px solid #d1c5b4; font-size: 0.95rem; color: #4e4639; }
+  .hours-row:last-child { border-bottom: none; }
+  .hours-row .val { font-weight: 600; color: #1f1b17; }
+  .hours-row .val.special { color: #775a19; }
+  .hours-row .val.closed { color: #ba1a1a; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; }
+  .map-box { position: relative; min-height: 500px; background: #eae1da; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.1); }
+  .map-box img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); opacity: 0.8; }
+  .map-card { position: absolute; bottom: 2.5rem; left: 2.5rem; right: 2.5rem; background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); padding: 1.5rem; border: 1px solid rgba(119,90,25,0.2); }
+  .map-card-label { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: #775a19; font-weight: 700; margin-bottom: 0.5rem; }
+  .map-card p { font-size: 0.9rem; color: #1f1b17; margin-bottom: 1rem; }
+  .map-card a { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: #79564f; font-weight: 700; text-decoration: underline; text-underline-offset: 6px; }
+
+  /* FOOTER */
+  footer { background: #fafaf9; border-top: 1px solid rgba(197,160,89,0.1); padding: 4rem 2rem; }
+  .footer-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; }
+  .footer-brand { font-family: 'Noto Serif', serif; font-size: 1.2rem; font-style: italic; color: #292524; margin-bottom: 0.75rem; }
+  .footer-tagline { font-family: 'Noto Serif', serif; font-size: 0.85rem; color: #78716c; line-height: 1.6; }
+  .footer-col-label { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: #4e4639; font-weight: 700; margin-bottom: 0.75rem; display: block; }
+  .footer-col a { display: block; font-family: 'Noto Serif', serif; font-size: 0.85rem; color: #78716c; text-decoration: none; margin-bottom: 0.5rem; transition: color 0.2s; }
+  .footer-col a:hover { color: #C5A059; text-decoration: underline; text-underline-offset: 4px; }
+  .footer-col-right { display: flex; flex-direction: column; align-items: flex-end; }
+  .footer-copy { font-family: 'Noto Serif', serif; font-size: 0.75rem; color: #78716c; margin-top: 1rem; }
+
+  /* CALL BTN */
+  .call-btn { display: inline-block; margin-top: 2rem; background: #775a19; color: white; padding: 1rem 2rem; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; text-decoration: none; transition: background 0.2s; border-radius: 4px; }
+  .call-btn:hover { background: #5d4201; }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-img-wrap { display: none; }
+    .about-inner { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .contact-inner { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr; }
+    .footer-col-right { align-items: flex-start; }
+    .booking-embed iframe { height: 900px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">TP Hair Design</span>
+    <div class="nav-links">
+      <a href="#services" class="active">Services</a>
+      <a href="#gallery">Portfolio</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="#booking" class="nav-book-btn">Book Now</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAebeTp1dtz7mWmD3XdR7aeOG6vDGizD0Fsp7coX1i7T56zxvfjZyZmRcL6uYqo7dlkE5p4yEa8CEHHrCu_CC2IAurJKpvFOFWGlt773ruyh7eQL1-Crg9XJrMBZHFrYjJ15tXPLYv3Ibaw-nVE0ltaJNef1sMqVZ9MT_cl1dKWoabYnr4RsVeSzxI8p2plB4j0Cih6oSFI9WD6Hr8W4icEiQnhk6ZbczqtwWUZydqJfSU9Cuq7tl5lv2uUt7Dh5tz_gA2GLBGw264K" alt="Salon interior"/>
+    <div class="hero-bg-overlay"></div>
+  </div>
+  <div class="hero-inner">
+    <div>
+      <span class="hero-label">Blair Athol's Premier Salon</span>
+      <h1>TP Hair Design</h1>
+      <p class="hero-sub">Your hair, your style — done right in Blair Athol. Experience curated excellence in a serene, boutique environment.</p>
+      <div class="hero-btns">
+        <a href="#booking" class="btn-book">Book Appointment</a>
+        <a href="#services" class="btn-outline">View Services</a>
+      </div>
+    </div>
+    <div class="hero-img-wrap">
+      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkaeCHkvPYmkNF_sGqEbASeaf6yEO0MBd7DAzWGhL33K_of-IL_vvzYZ8aKUarJ13XW6ZuOy5lEfHgHAauFQy_lZBTCOL4O7H66qpLx4_5u3w_4Ra3FFBNQEkVA_vb6AE1kGXppl1RKqYQgTIROsIm0NrN5-0yqe_r8qmSBikQifxLXINXtVoLcXQ7D-MM-PAWwgPfGIDEskeJufMudnzlXdGD2DwfcjHnvZb5a-NiOiNT5pD1F85tgb5onm177NXERnikJ90GD-ld" alt="Model with professional hair styling"/>
+      <div class="hero-quote">
+        <p>"Exceptional skill meets personalized care. We don't just cut hair; we craft identities."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-imgs">
+      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCu2cpQB__sjEGMbqhxruJOj_GlhRU2X9t4sIFS5LzF5UIACTObM6anc9X3xLjQBGCLdV8X_F1Saxi6-H7w9R2tUvTLUc6JotwcNhCGdYtsj1bSFKq5Korf03OiGJMub5dsCHvdeuySZi1sjfkjqbTbvXxQkZH0XTtjAO5cSBjTTDN-DnupScaUQLXlPDwhwaFHqTJ3H1mCNsq7dlUStlheVYJPOfHCfskWZPSi878_JsGEkd1uy3BdgroUafUA-G4W_xpZ6sD_lM6A" alt="Salon workspace"/>
+      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEMqOGtmVj8VOhcN0SfN8qE4E_-jwg1HtmXnVCIVuNc34MJmsOgImzYj_2H_Fbw1Dohv64qMG1gAKgEu2kCeo2JFL8ZHQttZtMkz__z-nL8tC7g5O1IY5owydbZZYukxkH5HUWVjywQe7Ssyn7ufEFtaSWnElqdArE9-iUBQMBvZjfJ1wve8H4SKzoF0-vcKWkJ01rx_R99hLk--3fkUDoYtuz1Uny_G8Jn_hPKhM8pLNVYNKaEjPz6uCK9YgmCT-OSRzdpLC3teK-" alt="Salon detail"/>
+    </div>
+    <div class="about-text">
+      <h2>Warm, Professional, and Welcoming</h2>
+      <div class="about-divider"></div>
+      <p>At TP Hair Design, we believe that luxury should be felt the moment you step through our doors. Our Blair Athol sanctuary is designed for those who value professional expertise combined with a serene, pampering environment.</p>
+      <p>Our team of master stylists is dedicated to the art of hair. From precision cutting to bespoke color transformations, we take the time to understand your unique lifestyle and aesthetic goals.</p>
+      <div class="about-badge">
+        <span class="material-symbols-outlined">verified</span>
+        <span class="about-badge-label">Certified Master Colorists</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="services-header">
+    <span class="section-label">Our Craft</span>
+    <h2 class="section-title">Curated Services</h2>
+    <p class="section-sub">Elevate your look with our comprehensive range of professional hair services tailored to your needs.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <h3>Precision Haircuts</h3>
+      <ul>
+        <li>Women's Cut &amp; Style</li>
+        <li>Curly Hair Specialization</li>
+        <li>Children's Haircuts</li>
+      </ul>
+      <span class="service-badge">Specialist</span>
+    </div>
+    <div class="service-card">
+      <h3>Bespoke Colour</h3>
+      <ul>
+        <li>Hair Colouring</li>
+        <li>Signature Balayage</li>
+        <li>Highlights &amp; Foils</li>
+      </ul>
+      <span class="service-badge">Master Colorist</span>
+    </div>
+    <div class="service-card">
+      <h3>Styling &amp; Finish</h3>
+      <ul>
+        <li>Signature Blow Dry</li>
+        <li>Keratin Treatment</li>
+        <li>Perms</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <h3>Extensions &amp; Weaves</h3>
+      <ul>
+        <li>Hair Extensions</li>
+        <li>Hair Weaves</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <h3>Traditional Artistry</h3>
+      <ul>
+        <li>Locs Maintenance</li>
+        <li>Intricate Braiding</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="gallery-inner">
+    <div class="gallery-header">
+      <div>
+        <span class="section-label">The Gallery</span>
+        <h2 class="section-title">Recent Artistry</h2>
+      </div>
+      <span class="gallery-follow">Follow us @TPHairDesign</span>
+    </div>
+    <div class="gallery-grid">
+      <div><img src="https://lh3.googleusercontent.com/aida/ADBb0ugp9WIM-y0efC8ndA7_ySzIIrooNiTHY8nMu_yolgL4HAj4HhakwNW5R2irgVdNyxrewy3eQJ2a1FjRPJIBqstnJ0xRzGMDOfqQ8mC65CpW2oJlvrRKd08caHKS5BPp5ldK_DsmFb5kTw0x_NUOpMylqOfZhSQTrmqOt1NJqy5QgrFcyyYwpLcEy8LYSmFunVkTYbJCYzZj6T1AFpXN18D9DmuBAv4Un_JJzmO-M63KrGIcniVFn1_tquve2T0pyi9XjLTe2Pdyv6g" alt="Blonde hair"/></div>
+      <div class="tall"><img src="https://lh3.googleusercontent.com/aida/ADBb0uhheqZpBBxQLSUjv0kIeWUub2Aqv4p-oHsxc5ksfAZ-WcYml22acVArv8Z3MSFaOu-vWS8VGBKUiJ809h06FDn6h34avVPWVWwavypC02bNK3o7k2EzJJqxlk8-oA_gOa969WEoums52G-32TJHXmiXrN0nyEMK3JHktJ2fflQMq-DvqZ9j6ShZWp4ZdCrdyHqSBOXOxY6Tx3biitQk5bOFVw0MXsD_E-jdt1F9HYNBvqGoIzsCtl6kG9sbX0-YlLafpU9miQn8ioc" alt="Wavy blonde"/></div>
+      <div><img src="https://lh3.googleusercontent.com/aida/ADBb0ugXnFZVXybMfTGs7-_HWjpVjQLummD5_ahZiDgQm4kcohElV5c1QzfPuwHYu0p0ewPf6_fq6wi70u8K4q0PyyQ7YMAHfQ2XB7QUy_A8CiayztshahofoXk5qCFbo4BH0Wgf23zSayrCXu0l4uI_U8f80P9Gnff4asHoBACyiU6M-tn-u9k17OuecVNXiLLV8Zd4OZ9owY4GVXNTKoV0ZPuOjhRePMah6P_wIJ-O43fr3uGVxoAJDqhc69tldKRsyDBRS1GPZib_tOs" alt="Platinum blonde"/></div>
+      <div><img src="https://lh3.googleusercontent.com/aida/ADBb0uhT86nC5O3NlmkyAMqOF_o4A1K-36fr2yiXrzxVUxXx5jpVe9wh93K_bLaGZ64MJ7V-DmN75PV69E5iiQdBNa_4I3X00HmbI6fi8E2aI2W7Xhh4AQNy2rw0o9yZ77Uu0ljzh--j4p4X5MnI1Da9zPPlqWfk0b_-9hHLPbH4RHXzUxbP5vIQ2kjWNHbC96IusPRtkt-gErP5do-62CXxGh5-mSHdhYtbcYmsaFIUxmvukgqZydj14oqK356hIIVAonTLHOdQt3L1Ew" alt="Red curls"/></div>
+      <div><img src="https://lh3.googleusercontent.com/aida/ADBb0ujuQpIe5h_uS2MuBCRpDKXaDvikoSN-SqXdP6wglLy5gvD2VZ4wBkKmuAtA6aBCIzc74N0Co8lWsbvfi2_R-TRdhdr_UimlHdQI3sMxekja5p3M2cIo9-fPM1oAYSagxM-5ri20NDJbnGkjGYEsFdluvQYltwIi9kdhxeKz9xQtX6Xg0339euV3tZqtL2RHRgrqTDIbaoeFTD_rIWWqJtIFgq2F1h0_D9hQdK--5ESo21WLWlpT9_995tKlDQhLbOS7JxSErwA_Ig" alt="Purple hair"/></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING SECTION -->
+<section class="booking" id="booking">
+  <div class="booking-inner">
+    <span class="section-label">Online Booking</span>
+    <h2 class="section-title">Book Your Appointment</h2>
+    <p class="section-sub">Choose a time that suits you. You'll receive a confirmation email once your booking is approved.</p>
+    <a href="https://cal.com/1qw8z/hair-design" target="_blank" class="btn-book" style="margin-top:2rem; font-size:0.85rem; padding: 1.2rem 3rem;">Book Now</a>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div>
+      <h2>Visit Our Sanctuary</h2>
+      <p class="contact-sub">Located in the heart of Blair Athol, TP Hair Design is your destination for premium hair artistry.</p>
+      <div class="contact-loc">
+        <span class="material-symbols-outlined">location_on</span>
+        <div>
+          <div class="contact-loc-label">Our Location</div>
+          <p>142 Grand Junction Road,<br/>Blair Athol SA 5084, Australia</p>
+        </div>
+      </div>
+      <div class="hours-box">
+        <h4>Opening Hours</h4>
+        <div class="hours-row"><span>Mon – Wed</span><span class="val">10:00am – 6:00pm</span></div>
+        <div class="hours-row"><span>Thursday</span><span class="val special">10:00am – 8:00pm</span></div>
+        <div class="hours-row"><span>Friday</span><span class="val">10:00am – 6:00pm</span></div>
+        <div class="hours-row"><span>Saturday</span><span class="val">9:00am – 4:00pm</span></div>
+        <div class="hours-row"><span>Sunday</span><span class="val closed">Closed</span></div>
+      </div>
+    </div>
+    <div class="map-box">
+      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtfotowYCoNWY-jLWiIZm4eUao4Wfd7-L_gffFkp5CHkRq7AzFmwcqTO2CBCTwUeCxneoLaQy6VXk3TM9oAkt242LdNgZ1pTfodP7tRPBZFXWSjqL7r8WGh1eUozeYKWoguIzZgLf3UzA9_4WQ2KwprZrFmOTnHe1yqC05pjOuE-cs6eOMfoGYjtp6GsjV89TnlicLeusdpgZmxuKkYeDQ6dMp3_bQ-vk0tFSMbTojqAIjFljeo3T18S4egAz3H9HZDgPU3iMqdHSX" alt="Map"/>
+      <div class="map-card">
+        <div class="map-card-label">Finding Us</div>
+        <p>Convenient on-site parking available for all clients.</p>
+        <a href="https://maps.google.com/?q=142+Grand+Junction+Road+Blair+Athol+SA" target="_blank">Open in Maps</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">TP Hair Design</div>
+      <p class="footer-tagline">Curated Excellence for the modern individual.</p>
+    </div>
+    <div class="footer-col">
+      <span class="footer-col-label">Connect</span>
+      <a href="#">Instagram</a>
+      <a href="https://www.facebook.com/people/TP-Hair-design/100092283635414/">Facebook</a>
+    </div>
+    <div class="footer-col footer-col-right">
+      <span class="footer-col-label">Contact</span>
+      <a href="tel:0884631662">(08) 8463 1662</a>
+      <p class="footer-copy">© 2025 TP Hair Design. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
